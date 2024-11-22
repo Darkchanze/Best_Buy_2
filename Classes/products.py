@@ -144,9 +144,9 @@ class Product:
             raise ValueError("Quantity is too high")
         if quantity < 0:
             raise ValueError("Quantity must not be negative")
+        self.set_quantity(self.quantity - quantity)
         if self.promotion:
             return self.promotion.apply_promotion(self, quantity)
-        self.set_quantity(self.quantity - quantity)
         return self.price * quantity
 
 

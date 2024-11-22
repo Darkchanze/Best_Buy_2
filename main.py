@@ -2,8 +2,14 @@ from Classes import Store, Product, NonStockedProduct, LimitedProduct, PercentDi
 
 
 def start(store, product_list):
-    """Prints the user_interface in a loop. Handles the user input and sends
-    him to the required function, while handling errors."""
+    """
+    Prints the user_interface in a loop. Handles the user input and sends
+    him to the required function, while handling errors.
+
+    Args:
+        store: The store instance to perform operations on.
+        product_list (list): A list of all products available in the store.
+    """
     while True:
         store_functions ={1: list_all_products_in_store,
                           2: show_total_amount_in_store,
@@ -31,23 +37,38 @@ def start(store, product_list):
 
 
 def list_all_products_in_store(store):
-    """Lists every product in the store. Numbered by the index of the list + 1."""
+    """
+    Lists all products available in the store, including their price and quantity.
+
+    Args:
+        store: The store instance containing the products.
+    """
     list_of_products = store.get_all_products()
     print("------")
     for i, product in enumerate(list_of_products, 1):
-        print(f"{i}. {product}, Price: {product.quantity}, Quantity: {product.quantity}")
+        print(f"{i}. {product}, Price: {product.price}, Quantity: {product.quantity}")
     print("------")
 
 
 def show_total_amount_in_store(store):
-    """Prints the total amount of items available at the store."""
+    """
+    Prints the total amount of items available at the store.
+
+    Args:
+        store: The store instance to access (get_total_quantity()) the total quantity.
+    """
     print(f"Total of {store.get_total_quantity()} in store.")
 
 
 def make_an_order(store, product_list):
-    """Gets store Class and the list of products. Creates a List of the orders by prompting
-    another function to give back a order_tuple as long as the user wants to add items.
-    Then gets the order from the store and print the price."""
+    """
+    Allows the user to select products and quantities, adds them to an order, 
+    and then shows the total price.
+
+    Args:
+        store: The store instance to place the order.
+        product_list (list): A list of all products available in the store.
+    """
     order_list = []
     list_all_products_in_store(store)
     print("When you want to finish order, enter empty text.")
@@ -63,8 +84,16 @@ def make_an_order(store, product_list):
 
 
 def get_item_and_quantity(product_list):
-    """First get the product number then the quantity of the order with error management.
-     Then return a tuple of the order."""
+    """
+    Asks the user to select a product and specify a quantity, validating the input.
+
+    Args:
+        product_list (list): A list of all products available in the store.
+
+    Returns:
+        tuple: A tuple containing the selected product and the specified quantity.
+        str: Returns "break" if the user wants to end the order process.
+    """
     # Get product number
     product_number = input("Which product number do you want?")
     if product_number == "":
@@ -100,6 +129,7 @@ def get_item_and_quantity(product_list):
 
 
 def main():
+    """Sets up the store inventory, applies promotions, and starts the interface."""
     # setup initial stock of inventory
     product_list = [Product("MacBook Air M2", price=1450, quantity=100),
                     Product("Bose QuietComfort Earbuds", price=250, quantity=500),
