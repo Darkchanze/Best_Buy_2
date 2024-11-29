@@ -46,7 +46,7 @@ def list_all_products_in_store(store):
     list_of_products = store.get_all_products()
     print("------")
     for i, product in enumerate(list_of_products, 1):
-        print(f"{i}. {product}, Price: {product.price}, Quantity: {product.quantity}")
+        print(product.show())
     print("------")
 
 

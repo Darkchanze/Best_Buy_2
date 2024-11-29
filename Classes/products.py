@@ -150,6 +150,7 @@ class Product:
         return self.price * quantity
 
 
+
     def __str__(self):
         """
         Returns the product's name.
